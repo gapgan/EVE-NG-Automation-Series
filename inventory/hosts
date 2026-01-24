@@ -1,0 +1,11 @@
+[routers]
+R1      ansible_host=172.16.0.11    loopback_ip=1.1.1.1
+R2      ansible_host=172.16.0.12    loopback_ip=2.2.2.2
+
+[routers:vars]
+ansible_network_os=ios
+ansible_connection=network_cli
+ansible_user=admin
+ansible_password=admin
+ansible_become=yes
+ansible_become_method=enable

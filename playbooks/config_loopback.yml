@@ -1,0 +1,20 @@
+---
+- name: Config Loopback0 inf on all Routers
+  hosts: routers
+  gather_facts: no
+  # It is best practice to define the connection type at the play level
+  vars:
+    ansible_connection: ansible.netcommon.network_cli
+    ansible_network_os: cisco.ios.ios
+
+  tasks:
+    - name: Config Loopback0 inf
+      cisco.ios.ios_config:
+        lines:
+          - description managed by Ansible
+          - ip address {{ loopback_ip }} 255.255.255.255
+        parents: interface Loopback0
+
+    - name: Save config
+      cisco.ios.ios_config:  # Fixed the typo here (was ios.ios.config)
+        save_when: always
