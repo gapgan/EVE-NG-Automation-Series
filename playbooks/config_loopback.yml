@@ -14,7 +14,9 @@
           - description managed by Ansible
           - ip address {{ loopback_ip }} 255.255.255.255
         parents: interface Loopback0
+      register: loopback_result  # <--- This captures the status of this task  
 
     - name: Save config
       cisco.ios.ios_config:  # Fixed the typo here (was ios.ios.config)
         save_when: always
+      when: loopback_result.changed  # <--- This only runs if the task above did something
