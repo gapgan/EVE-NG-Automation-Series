@@ -1,0 +1,32 @@
+---
+- name: Check Cisco IOS Status
+  hosts: routers
+  gather_facts: false
+  connection: network_cli
+
+  tasks:
+    - name: Gather Device Facts
+      cisco.ios.ios_facts:
+        # 'hardware' subset ensures model and serial are prioritized
+        gather_subset: 
+          - min
+          - hardware
+      register: device_facts
+
+    - name: Run Show IP Interface Brief
+      cisco.ios.ios_command:
+        commands:
+          - show ip interface brief
+      register: interface_output
+
+    - name: Display OS Version and Hardware
+      debug:
+        msg: 
+          - "Hostname: {{ ansible_net_hostname | default('N/A') }}"
+          - "Model: {{ ansible_net_model | default('Unknown Model') }}"
+          - "OS Version: {{ ansible_net_version | default('Unknown Version') }}"
+
+    - name: Display Interface Status and IP Addresses
+      debug:
+        # Use stdout_lines to print the formatted list of lines
+        msg: "{{ interface_output.stdout_lines[0] }}"
