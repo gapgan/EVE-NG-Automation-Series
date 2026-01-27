@@ -9,3 +9,13 @@ ansible_user=admin
 ansible_password=admin
 ansible_become=yes
 ansible_become_method=enable
+
+[fortigates]
+Forti-FW-1 ansible_host=192.168.0.204
+
+[fortigates:vars]
+ansible_network_os=fortinet.fortios.fortios
+ansible_connection=httpapi
+ansible_httpapi_use_ssl=yes
+ansible_httpapi_validate_certs=no
+ansible_httpapi_port=443
