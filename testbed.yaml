@@ -1,0 +1,33 @@
+devices:
+  R1:
+    alias: R1
+    connections:
+      cli:
+        ip: 172.16.0.11
+        protocol: ssh
+    credentials:
+      default:
+        password: '%ENV{DEF_PYATS_PASS}'
+        username: '%ENV{DEF_PYATS_USER}'
+    os: ios
+    platform: ios
+    type: Unknown
+  R2:
+    alias: R2
+    connections:
+      cli:
+        ip: 172.16.0.12
+        protocol: ssh
+    credentials:
+      default:
+        password: '%ENV{DEF_PYATS_PASS}'
+        username: '%ENV{DEF_PYATS_USER}'
+    os: ios
+    platform: ios
+    type: IOSv
+testbed:
+  credentials:
+    default:
+      password: '%ENV{DEF_PYATS_PASS}'
+      username: '%ENV{DEF_PYATS_USER}'
+topology: {}

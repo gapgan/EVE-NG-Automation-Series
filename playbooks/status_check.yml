@@ -1,8 +1,11 @@
 ---
 - name: Check Cisco IOS Status
-  hosts: routers
+  hosts: device_roles_router
   gather_facts: false
   connection: network_cli
+  vars:
+    ansible_user: admin
+    ansible_password: admin
 
   tasks:
     - name: Gather Device Facts
